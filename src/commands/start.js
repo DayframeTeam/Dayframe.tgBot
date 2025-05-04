@@ -1,16 +1,15 @@
 import { Markup } from 'telegraf';
 
 export default async function startCommand(ctx) {
-  const keyboard = Markup.keyboard(
+  const t = ctx.i18n;
+
+  const kb = Markup.keyboard(
     [
-      ['🕸️ Обзор графа', '📅 Задачи сегодня'],
-      ['⏳ Времени осталось', '🔜 Ближайшая задача'],
+      [t.menu.next, t.menu.today],
+      [t.menu.time, t.menu.graph],
     ],
-    {
-      resize_keyboard: true,
-      one_time_keyboard: false,
-    },
+    { resize_keyboard: true },
   );
 
-  await ctx.reply('Привет! 👋 Что делаем?', keyboard);
+  await ctx.reply(t.greeting, kb);
 }

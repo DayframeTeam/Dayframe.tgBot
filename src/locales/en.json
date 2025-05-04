@@ -1,0 +1,9 @@
+{
+  "greeting": "Hello! 👋 What would you like to do?",
+  "menu": {
+    "next": "🔜 Next task",
+    "today": "📅 Today's tasks",
+    "time": "⏳ Time left",
+    "graph": "🕸️ Graph overview"
+  }
+}
