@@ -1,15 +1,19 @@
 import 'dotenv/config';
 import { Telegraf } from 'telegraf';
+import startCommand from './commands/start.js';
+import scheduleHandler from './handlers/schedule.js';
+import graphHandler from './handlers/graph.js';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-bot.start(async (ctx) => {
-  await ctx.reply('Привет! Нажми на меню для Web App.');
-});
+// Команда /start
+bot.command('start', startCommand);
 
-bot.on('text', async (ctx) => {
-  await ctx.reply(`Вы написали: ${ctx.message.text}`);
-});
+// по тексту кнопки вызываем соответствующий хендлер
+bot.hears('🔜 Ближайшая задача', scheduleHandler);
+bot.hears('📅 Задачи сегодня', scheduleHandler);
+bot.hears('⏳ Времени осталось', scheduleHandler);
+bot.hears('🕸️ Обзор графа', graphHandler);
 
 bot.launch();
 process.once('SIGINT', () => bot.stop());
