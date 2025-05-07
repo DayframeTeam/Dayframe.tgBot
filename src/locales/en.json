@@ -14,6 +14,11 @@
       "searching": "🔎 Searching for similar entries…",
       "noResults": "⚠️ No results found.",
       "error": "❌ Search error. Please try again later."
+    },
+    "store": {
+      "added": "✅ Text saved.",
+      "error": "❌ Could not save text. Please try later.",
+      "unsupported": "⚠️ I can only save plain text messages."
     }
   },
   "nextTask": {

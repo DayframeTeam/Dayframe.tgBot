@@ -5,7 +5,7 @@
  * @param {object} [replyOpts] — опции для ctx.reply()
  * @param {number} [delay=5000] — сколько мс ждать перед удалением
  */
-export async function sendAndDelete(ctx, text, replyOpts = {}, delay = 5000) {
+async function sendAndDelete(ctx, text, replyOpts = {}, delay = 5000) {
   const msg = await ctx.reply(text, replyOpts);
   setTimeout(() => {
     ctx.deleteMessage(msg.message_id).catch(() => {
@@ -23,7 +23,7 @@ export async function sendAndDelete(ctx, text, replyOpts = {}, delay = 5000) {
  * @param {number} [intervalMs=4000] — интервал между sendChatAction
  * @returns {Promise<any>} результат fn
  */
-export async function withTyping(ctx, fn, intervalMs = 4000) {
+async function withTyping(ctx, fn, intervalMs = 4000) {
   const chatId = ctx.chat.id;
 
   // сразу одна индикация
@@ -51,7 +51,7 @@ export async function withTyping(ctx, fn, intervalMs = 4000) {
  * @param {TelegrafContext} ctx
  * @param {number} [interval=400] — интервал между сменой точек
  */
-export async function sendAnimatedDots(ctx, interval = 400) {
+async function sendAnimatedDots(ctx, interval = 400) {
   let dots = 3;
   let direction = 1;
   let isActive = true;
@@ -85,3 +85,5 @@ export async function sendAnimatedDots(ctx, interval = 400) {
     }
   };
 }
+
+export { sendAndDelete, withTyping, sendAnimatedDots };

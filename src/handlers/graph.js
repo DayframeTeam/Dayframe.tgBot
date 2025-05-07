@@ -19,12 +19,16 @@ export default async function graphHandler(ctx) {
 async function fetchGraphAndFormat(ctx) {
   try {
     // пробуем получить до 100 самых «близких» к пустому запросу
-    const { data } = await axios.post(
-      process.env.INDEXER_URL + '/search_text',
-      { text: '', top_k: 100 },
-      { headers: { 'Content-Type': 'application/json' } },
+    const { data } = await axios.get(
+      `${process.env.INDEXER_URL}/search_text`,
+      {
+        params: {
+          chat_id: String(ctx.from.id),
+          text: '',
+          top_k: 100,
+        },
+      },
     );
-
     // допустим, ваш API отдает { matches: [ { id, text, score }, … ] }
     const matches = data.matches || data; // подстрахуемся на случай, если возвращается сразу массив
 
