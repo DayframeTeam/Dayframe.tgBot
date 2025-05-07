@@ -8,7 +8,13 @@
     "allCommands": "List all available commands"
   },
   "commands": {
-    "start": "Start/restart the bot"
+    "start": "Start/restart the bot",
+    "find": {
+      "prompt": "Please enter a phrase to search for similar entries 🔍",
+      "searching": "🔎 Searching for similar entries…",
+      "noResults": "⚠️ No results found.",
+      "error": "❌ Search error. Please try again later."
+    }
   },
   "nextTask": {
     "missed": "Missed tasks:",
