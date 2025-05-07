@@ -2,7 +2,7 @@ import axios from 'axios';
 import { sendAnimatedDots } from '../utils/botHelpers.js';
 import 'dotenv/config';
 
-export default async function graphHandler(ctx) {
+export default async function graphCommand(ctx) {
   // Запускаем dots и получаем функцию для удаления
   const removeDots = await sendAnimatedDots(ctx, 300);
 

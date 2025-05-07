@@ -6,7 +6,7 @@ export default async function startCommand(ctx) {
   const kb = Markup.keyboard(
     [
       [t.menu.next, t.menu.today],
-      [t.menu.time, t.menu.graph],
+      [t.menu.time, t.menu.find.command],
       [t.menu.allCommands],
     ],
     { resize_keyboard: true },

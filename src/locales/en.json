@@ -4,17 +4,18 @@
     "next": "🔜 Next task",
     "today": "📅 Tasks for today",
     "time": "⏳ Time left",
-    "graph": "🕸️ Graph overview",
-    "allCommands": "List all available commands"
-  },
-  "commands": {
-    "start": "Start/restart the bot",
     "find": {
+      "command": "Find 🔍",
       "prompt": "Please enter a phrase to search for similar entries 🔍",
       "searching": "🔎 Searching for similar entries…",
       "noResults": "⚠️ No results found.",
       "error": "❌ Search error. Please try again later."
     },
+    "allCommands": "List all available commands"
+  },
+  "commands": {
+    "start": "Start/restart the bot",
+    "graph": "🕸️ Graph overview",
     "store": {
       "added": "✅ Text saved.",
       "error": "❌ Could not save text. Please try later.",

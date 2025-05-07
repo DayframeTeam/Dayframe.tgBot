@@ -4,11 +4,11 @@ import { Telegraf, session } from 'telegraf';
 import { i18nMiddleware } from './utils/i18n.js';
 import startCommand from './commands/start.js';
 import todayTasksHandler from './handlers/today.tasks.js';
-import graphHandler from './handlers/graph.js';
+import graphCommand from './commands/graph.js';
 import nextTaskHandler from './handlers/next.task.js';
 import timeLeftHandler from './handlers/timeLeft.js';
 import allCommandsHandler from './handlers/all.commands.js';
-import findCommand from './commands/find.js';
+import findHandler from './handlers/find.js';
 import axios from 'axios';
 import { escapeHtml } from './utils/htmlUtils.js';
 import { sendAndDelete } from './utils/botHelpers.js';
@@ -30,7 +30,7 @@ bot.use((ctx, next) => {
 
     (async () => {
       // Сигналим «ищем…»
-      await ctx.reply(ctx.i18n.commands.find.searching);
+      await ctx.reply(ctx.i18n.menu.find.searching);
 
       try {
         const { data } = await axios.get(
@@ -46,7 +46,7 @@ bot.use((ctx, next) => {
 
         const matches = data.matches || [];
         if (matches.length === 0) {
-          return ctx.reply(ctx.i18n.commands.find.noResults);
+          return ctx.reply(ctx.i18n.menu.find.noResults);
         }
 
         // Выводим результаты по одному
@@ -57,7 +57,7 @@ bot.use((ctx, next) => {
         }
       } catch (err) {
         console.error(err);
-        await ctx.reply(ctx.i18n.commands.find.error);
+        await ctx.reply(ctx.i18n.menu.find.error);
       }
     })();
 
@@ -70,14 +70,14 @@ bot.use((ctx, next) => {
 
 // /start
 bot.command('start', startCommand);
-// /find
-bot.command('find', findCommand);
+// /graph
+bot.command('graph', graphCommand);
 
 // Реагируем на переведённые тексты кнопок
 bot.hears((txt, ctx) => txt === ctx.i18n.menu.next, nextTaskHandler);
 bot.hears((txt, ctx) => txt === ctx.i18n.menu.today, todayTasksHandler);
 bot.hears((txt, ctx) => txt === ctx.i18n.menu.time, timeLeftHandler);
-bot.hears((txt, ctx) => txt === ctx.i18n.menu.graph, graphHandler);
+bot.hears((txt, ctx) => txt === ctx.i18n.menu.find.command, findHandler);
 bot.hears((txt, ctx) => txt === ctx.i18n.menu.allCommands, allCommandsHandler);
 
 bot.on('message', async (ctx) => {
