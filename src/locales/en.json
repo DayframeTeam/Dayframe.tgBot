@@ -17,6 +17,11 @@
     "header": "Tasks for",
     "noTasks": "No tasks for today."
   },
+  "timeLeft": {
+    "result": "Free time left:",
+    "note": "(only tasks with start and end are counted)",
+    "error": "❌ Could not calculate free time. Please try again later."
+  },
   "errors": {
     "next": "❌ Could not determine the next task. Please try again later.",
     "today": "❌ Could not fetch today's tasks. Please try again later."
