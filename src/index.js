@@ -30,7 +30,7 @@ bot.use((ctx, next) => {
 
     (async () => {
       // Сигналим «ищем…»
-      await ctx.reply(ctx.i18n.menu.find.searching);
+      await sendAndDelete(ctx, ctx.i18n.menu.find.searching);
 
       try {
         const { data } = await axios.get(
@@ -57,7 +57,7 @@ bot.use((ctx, next) => {
         }
       } catch (err) {
         console.error(err);
-        await ctx.reply(ctx.i18n.menu.find.error);
+        await sendAndDelete(ctx,ctx.i18n.menu.find.error);
       }
     })();
 
@@ -95,14 +95,14 @@ bot.on('message', async (ctx) => {
         },
         { headers: { 'Content-Type': 'application/json' } },
       );
-      await sendAndDelete(ctx, ctx.i18n.commands.store.added);
+      await sendAndDelete(ctx, ctx.i18n.store.added);
     } catch (err) {
       console.error('❌ Save text error', err);
-      await sendAndDelete(ctx, ctx.i18n.commands.store.error);
+      await sendAndDelete(ctx, ctx.i18n.store.error);
     }
   } else {
     // всё, что не plain text
-    await sendAndDelete(ctx, ctx.i18n.commands.store.unsupported);
+    await sendAndDelete(ctx, ctx.i18n.store.unsupported);
   }
 });
 

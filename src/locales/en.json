@@ -5,9 +5,9 @@
     "today": "📅 Tasks for today",
     "time": "⏳ Time left",
     "find": {
-      "command": "Find 🔍",
-      "prompt": "Please enter a phrase to search for similar entries 🔍",
-      "searching": "🔎 Searching for similar entries…",
+      "command": "🔍 Find notes",
+      "prompt": "Please enter a phrase to search for similar notes 🔍",
+      "searching": "🔎 Searching for similar notes…",
       "noResults": "⚠️ No results found.",
       "error": "❌ Search error. Please try again later."
     },
@@ -15,12 +15,12 @@
   },
   "commands": {
     "start": "Start/restart the bot",
-    "graph": "🕸️ Graph overview",
-    "store": {
-      "added": "✅ Text saved.",
-      "error": "❌ Could not save text. Please try later.",
-      "unsupported": "⚠️ I can only save plain text messages."
-    }
+    "graph": "Show all saved notes 🕸️"
+  },
+  "store": {
+    "added": "✅ Note saved.",
+    "error": "❌ Could not save note. Please try later.",
+    "unsupported": "⚠️ I can only save plain text messages."
   },
   "nextTask": {
     "missed": "Missed tasks:",
