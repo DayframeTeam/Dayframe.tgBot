@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 export default async function findCommand(ctx) {
   // 1) Спрашиваем фразу
   await ctx.reply(ctx.i18n.commands.find.prompt);
