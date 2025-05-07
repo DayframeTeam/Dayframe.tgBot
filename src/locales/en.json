@@ -2,7 +2,7 @@
   "greeting": "Hello! 👋 What would you like to do?",
   "menu": {
     "next": "🔜 Next task",
-    "today": "📅 Today's tasks",
+    "today": "📅 Tasks for today",
     "time": "⏳ Time left",
     "graph": "🕸️ Graph overview"
   }
