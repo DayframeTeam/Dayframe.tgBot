@@ -44,12 +44,12 @@ async function fetchTasks(ctx) {
   const sorted = [...withTime, ...withoutTime];
 
   if (!sorted.length) {
-    return `<b>📅 Задачи на ${displayDate}:</b>\nНет задач на сегодня.`;
+    return `Нет задач на сегодня.`;
   }
 
   // 4) Формируем текст
   const lines = [];
-  lines.push(`<b>📅 Задачи на ${displayDate}:</b>`);
+  lines.push(`<b>Задачи на ${displayDate}:</b>`);
   lines.push('');
 
   sorted.forEach((it, idx) => {
@@ -71,7 +71,7 @@ async function fetchTasks(ctx) {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
-    const expMark = it.exp && it.exp > 0 ? ` ⚡${it.exp}` : '';
+    const expMark = it.exp && it.exp > 0 ? ` ⚡+${it.exp}` : '';
 
     // оборачиваем вместе время + текст
     let label = `${timeLabel}${title}`;
@@ -79,7 +79,7 @@ async function fetchTasks(ctx) {
       label = `<s>${label}</s>`;
     }
 
-    lines.push(`${idx + 1}. ${colorMark}${label}${expMark}`);
+    lines.push(`- ${colorMark}${label}${expMark}`);
   });
 
   return lines.join('\n');
