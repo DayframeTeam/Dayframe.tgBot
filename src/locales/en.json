@@ -1,10 +1,14 @@
 {
-  "greeting": "Hello! 👋 What would you like to do?",
+  "greeting": "Hello! 👋",
   "menu": {
     "next": "🔜 Next task",
     "today": "📅 Tasks for today",
     "time": "⏳ Time left",
-    "graph": "🕸️ Graph overview"
+    "graph": "🕸️ Graph overview",
+    "allCommands": "List all available commands"
+  },
+  "commands": {
+    "start": "Start/restart the bot"
   },
   "nextTask": {
     "missed": "Missed tasks:",

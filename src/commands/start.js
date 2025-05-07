@@ -7,6 +7,7 @@ export default async function startCommand(ctx) {
     [
       [t.menu.next, t.menu.today],
       [t.menu.time, t.menu.graph],
+      [t.menu.allCommands],
     ],
     { resize_keyboard: true },
   );
