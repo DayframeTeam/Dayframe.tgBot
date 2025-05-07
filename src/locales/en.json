@@ -5,5 +5,20 @@
     "today": "📅 Tasks for today",
     "time": "⏳ Time left",
     "graph": "🕸️ Graph overview"
+  },
+  "nextTask": {
+    "missed": "Missed tasks:",
+    "nextHeader": "Next task:",
+    "noTimed": "No tasks with start time.",
+    "noAll": "✅ All tasks for today are done or none exist.",
+    "withoutTime": "Tasks without start time:"
+  },
+  "todayTasks": {
+    "header": "Tasks for",
+    "noTasks": "No tasks for today."
+  },
+  "errors": {
+    "next": "❌ Could not determine the next task. Please try again later.",
+    "today": "❌ Could not fetch today's tasks. Please try again later."
   }
 }

@@ -44,12 +44,12 @@ async function fetchTasks(ctx) {
   const sorted = [...withTime, ...withoutTime];
 
   if (!sorted.length) {
-    return `Нет задач на сегодня.`;
+    return ctx.i18n.todayTasks.noTasks;
   }
 
   // 4) Формируем текст
   const lines = [];
-  lines.push(`<b>Задачи на ${displayDate}:</b>`);
+  lines.push(`<b>${ctx.i18n.todayTasks.header} ${displayDate}</b>`);
   lines.push('');
 
   sorted.forEach((it, idx) => {
@@ -64,9 +64,9 @@ async function fetchTasks(ctx) {
       }
     }
 
-    const colorMark = it.priority ? getPriorityEmoji(it.priority) + ' ' : '';
+    const colorMark = getPriorityEmoji(it.priority);
 
-    let title = (it.title || 'Без названия')
+    let title = (it.title || ctx.i18n.todayTasks.noTitle)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
@@ -79,7 +79,7 @@ async function fetchTasks(ctx) {
       label = `<s>${label}</s>`;
     }
 
-    lines.push(`- ${colorMark}${label}${expMark}`);
+    lines.push(`${colorMark} ${label}${expMark}`);
   });
 
   return lines.join('\n');

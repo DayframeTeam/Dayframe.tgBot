@@ -1,4 +1,3 @@
-
 const priorityEmoji = {
   low: '🟢',
   medium: '🟡',
@@ -6,5 +5,5 @@ const priorityEmoji = {
 };
 
 export function getPriorityEmoji(priority) {
-  return priorityEmoji[priority] || '🟢';
+  return priorityEmoji[priority] || '🔵';
 }
