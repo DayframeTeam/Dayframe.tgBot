@@ -3,6 +3,7 @@ import { sendAnimatedDots } from '../utils/botHelpers.js';
 import 'dotenv/config';
 import { getPriorityEmoji } from '../utils/priority.js';
 import { sanitizeInput } from '../utils/htmlUtils.js';
+import { sortByPriority } from '../utils/sort.js';
 
 const API_BASE = process.env.SERVER_URL || 'http://localhost:3000';
 
@@ -49,7 +50,7 @@ async function fetchTasks(ctx) {
   const withTime = items
     .filter((i) => i.start_time)
     .sort((a, b) => a.start_time.localeCompare(b.start_time));
-  const withoutTime = items.filter((i) => !i.start_time);
+  const withoutTime = sortByPriority(items.filter((i) => !i.start_time));
   const sorted = [...withTime, ...withoutTime];
 
   if (!sorted.length) {
@@ -79,7 +80,7 @@ async function fetchTasks(ctx) {
 
     // оборачиваем вместе время + текст
     let label = `${timeLabel}${sanitizeInput(it.title)}`;
-    if (!it.__isTemplate && sanitizeInput(it.is_done)) {
+    if (!it.__isTemplate && it.is_done) {
       label = `<s>${label}</s>`;
     }
 
