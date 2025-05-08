@@ -93,7 +93,7 @@ export default async function nextTaskHandler(ctx) {
     await ctx.reply(lines.join('\n'), { parse_mode: 'HTML' });
   } catch (err) {
     console.error('❌ nextTaskHandler error:', err);
-    await ctx.reply(ctx.i18n.errors.next);
+    await ctx.reply(ctx.i18n.nextTask.error);
   } finally {
     await removeDots();
   }

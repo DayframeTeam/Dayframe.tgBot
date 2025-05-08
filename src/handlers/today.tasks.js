@@ -20,9 +20,17 @@ export default async function todayTasksHandler(ctx) {
 
 async function fetchTasks(ctx) {
   const chatId = ctx.from.id;
-  const { data } = await axios.get(`${API_BASE}/bot/today/${chatId}`);
-  let { tasks = [], templates = [], dateString } = data;
+  let tasks = [];
+  let templates = [];
+  let dateString = '';
+  try {
+    const { data } = await axios.get(`${API_BASE}/bot/today/${chatId}`);
+    ({ tasks = [], templates = [], dateString } = data);
 
+  } catch (error) {
+    console.error('❌ Fetch tasks error', error);
+    return ctx.i18n.todayTasks.error;
+  }
   // 1) Переворачиваем дату из YYYY.MM.DD или YYYY-MM-DD → DD.MM.YYYY
   let displayDate = dateString;
   const m = dateString.match(/^(\d{4})[.-](\d{2})[.-](\d{2})$/);

@@ -27,19 +27,17 @@
     "nextHeader": "Next task:",
     "noTimed": "No tasks with start time.",
     "noAll": "✅ All tasks for today are done or none exist.",
-    "withoutTime": "Tasks without start time:"
+    "withoutTime": "Tasks without start time:",
+    "error": "❌ Could not determine the next task. Please try again later."
   },
   "todayTasks": {
     "header": "Tasks for",
-    "noTasks": "No tasks for today."
+    "noTasks": "No tasks for today.",
+    "error": "❌ Could not fetch today's tasks. Please try again later."
   },
   "timeLeft": {
     "result": "Free time left:",
     "note": "(only tasks with start and end are counted)",
     "error": "❌ Could not calculate free time. Please try again later."
-  },
-  "errors": {
-    "next": "❌ Could not determine the next task. Please try again later.",
-    "today": "❌ Could not fetch today's tasks. Please try again later."
   }
 }
