@@ -1,12 +1,12 @@
 {
-  "greeting": "Hello! 👋",
+  "greeting": "👋 Hello! I'm Dayframe — your personal assistant. I can:\n• 📅 Show tasks\n• 📥 Save notes and files\n• 🔍 Search the knowledge base\n• 🕸️ Visualize your notes\n\nClick the button or enter the command to start.",
   "menu": {
     "next": "🔜 Next task",
     "today": "📅 Tasks for today",
     "time": "⏳ Time left",
     "find": {
       "command": "🔍 Find notes",
-      "prompt": "Please enter a phrase to search for similar notes 🔍",
+      "prompt": "Enter a keyword, and I'll find it in your knowledge base.",
       "searching": "🔎 Searching for similar notes…",
       "noResults": "⚠️ No results found.",
       "error": "❌ Search error. Please try again later."
