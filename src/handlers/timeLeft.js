@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { sendAnimatedDots } from '../utils/botHelpers.js';
 import 'dotenv/config';
-import { escapeHtml } from '../utils/htmlUtils.js';
+import { sanitizeInput } from '../utils/htmlUtils.js';
 
 const API_BASE = process.env.SERVER_URL || 'http://localhost:3000';
 
@@ -74,7 +74,7 @@ export default async function timeLeftHandler(ctx) {
     // 7) Строим короткий ответ
     // Если получилось отрицательное — всё равно показываем с минусом
     const lines = [];
-    lines.push(`<b>${ctx.i18n.timeLeft.result}</b> ${escapeHtml(formatted)}`);
+    lines.push(`<b>${ctx.i18n.timeLeft.result}</b> ${sanitizeInput(formatted)}`);
     lines.push(`<i>${ctx.i18n.timeLeft.note}</i>`);
 
     await ctx.reply(lines.join('\n'), { parse_mode: 'HTML' });

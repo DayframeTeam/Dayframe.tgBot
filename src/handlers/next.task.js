@@ -3,7 +3,7 @@ import { sendAnimatedDots } from '../utils/botHelpers.js';
 import 'dotenv/config';
 import { getPriorityEmoji } from '../utils/priority.js';
 import { sortByPriority } from '../utils/sort.js';
-import { escapeHtml } from '../utils/htmlUtils.js';
+import { sanitizeInput } from '../utils/htmlUtils.js';
 
 const API_BASE = process.env.SERVER_URL || 'http://localhost:3000';
 
@@ -51,7 +51,7 @@ export default async function nextTaskHandler(ctx) {
       missed.forEach((i) => {
         const timeLabel = `<code>${i.start_time.slice(0, 5)}</code> `;
         const colorMark = getPriorityEmoji(i.priority);
-        let title = escapeHtml(i.title);
+        let title = sanitizeInput(i.title);
         if (!i.__isTemplate && i.is_done) title = `<s>${title}</s>`;
         lines.push(`${colorMark} ${timeLabel}${title}`);
       });
@@ -63,7 +63,7 @@ export default async function nextTaskHandler(ctx) {
     if (next) {
       const timeLabel = `<code>${next.start_time.slice(0, 5)}</code> `;
       const colorMark = getPriorityEmoji(next.priority);
-      let title = escapeHtml(next.title);
+      let title = sanitizeInput(next.title);
       if (!next.__isTemplate && next.is_done) title = `<s>${title}</s>`;
       lines.push(`${colorMark} ${timeLabel}${title}`);
     } else {
@@ -80,7 +80,7 @@ export default async function nextTaskHandler(ctx) {
 
       // 9.2) Рендерим их списком
       sortedNoTime.forEach((i) => {
-        let title = escapeHtml(i.title || ctx.i18n.nextTask.noTitle);
+        let title = sanitizeInput(i.title || ctx.i18n.nextTask.noTitle);
         if (!i.__isTemplate && i.is_done) {
           title = `<s>${title}</s>`;
         }

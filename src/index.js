@@ -10,7 +10,7 @@ import timeLeftHandler from './handlers/timeLeft.js';
 import allCommandsHandler from './handlers/all.commands.js';
 import findHandler from './handlers/find.js';
 import axios from 'axios';
-import { escapeHtml } from './utils/htmlUtils.js';
+import { sanitizeInput } from './utils/htmlUtils.js';
 import { sendAndDelete } from './utils/botHelpers.js';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -24,9 +24,9 @@ bot.use((ctx, next) => {
   if (!ctx.session) ctx.session = {};
 
   // Если ждем от пользователя поисковый запрос
-  if (ctx.session.awaitingFind && ctx.message?.text) {
+  if (ctx.session.awaitingFind && sanitizeInput(ctx.message?.text)) {
     ctx.session.awaitingFind = false;
-    const query = ctx.message.text;
+    const query = sanitizeInput(ctx.message.text);
 
     (async () => {
       // Сигналим «ищем…»
@@ -51,7 +51,7 @@ bot.use((ctx, next) => {
 
         // Выводим результаты по одному
         for (const m of matches) {
-          const text = escapeHtml(m.metadata?.text || '');
+          const text = sanitizeInput(m.metadata?.text || '');
           if (!text) continue;
           await ctx.replyWithHTML(`<b>Text:</b> ${text}`);
         }
@@ -83,7 +83,7 @@ bot.hears((txt, ctx) => txt === ctx.i18n.menu.allCommands, allCommandsHandler);
 bot.on('message', async (ctx) => {
   const msg = ctx.message;
   // если есть текст и это не команда (начинается с '/')
-  if (msg.text && !msg.text.startsWith('/')) {
+  if (sanitizeInput(msg.text) && !msg.text.startsWith('/')) {
     try {
       // POST /add_text? или body JSON в зависимости от API
       const base = process.env.INDEXER_URL.replace(/\/+$/, '');
@@ -91,7 +91,7 @@ bot.on('message', async (ctx) => {
         `${base}/add_text`,
         {
           chat_id: String(ctx.from.id),
-          text: msg.text,
+          text: sanitizeInput(msg.text),
         },
         { headers: { 'Content-Type': 'application/json' } },
       );

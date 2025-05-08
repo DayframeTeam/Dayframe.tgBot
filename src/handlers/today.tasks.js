@@ -2,7 +2,7 @@ import axios from 'axios';
 import { sendAnimatedDots } from '../utils/botHelpers.js';
 import 'dotenv/config';
 import { getPriorityEmoji } from '../utils/priority.js';
-import { escapeHtml } from '../utils/htmlUtils.js';
+import { sanitizeInput } from '../utils/htmlUtils.js';
 
 const API_BASE = process.env.SERVER_URL || 'http://localhost:3000';
 
@@ -73,13 +73,13 @@ async function fetchTasks(ctx) {
       }
     }
 
-    const colorMark = getPriorityEmoji(it.priority);
+    const colorMark = getPriorityEmoji(sanitizeInput(it.priority));
 
-    const expMark = it.exp && it.exp > 0 ? ` ⚡+${it.exp}` : '';
+    const expMark = sanitizeInput(it.exp && it.exp > 0 ? ` ⚡+${it.exp}` : '');
 
     // оборачиваем вместе время + текст
-    let label = `${timeLabel}${escapeHtml(it.title)}`;
-    if (!it.__isTemplate && it.is_done) {
+    let label = `${timeLabel}${sanitizeInput(it.title)}`;
+    if (!it.__isTemplate && sanitizeInput(it.is_done)) {
       label = `<s>${label}</s>`;
     }
 
