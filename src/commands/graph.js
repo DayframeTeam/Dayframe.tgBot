@@ -25,7 +25,6 @@ async function fetchGraphAndFormat(ctx) {
         params: {
           chat_id: String(ctx.from.id),
           text: '',
-          top_k: 100,
         },
       },
     );

@@ -39,12 +39,12 @@ bot.use((ctx, next) => {
             params: {
               chat_id: String(ctx.from.id),
               text: query,
-              top_k: 10,
             },
           },
         );
 
         const matches = data.matches || [];
+        matches.sort((a, b) => b.score - a.score);
         if (matches.length === 0) {
           return ctx.reply(ctx.i18n.menu.find.noResults);
         }
@@ -52,12 +52,15 @@ bot.use((ctx, next) => {
         // Выводим результаты по одному
         for (const m of matches) {
           const text = sanitizeInput(m.metadata?.text || '');
+
           if (!text) continue;
-          await ctx.replyWithHTML(`<b>Text:</b> ${text}`);
+          await ctx.replyWithHTML(
+            `<b>Text:</b> ${text} <b>Score:</b> ${m.score}`,
+          );
         }
       } catch (err) {
         console.error(err);
-        await sendAndDelete(ctx,ctx.i18n.menu.find.error);
+        await sendAndDelete(ctx, ctx.i18n.menu.find.error);
       }
     })();
 
