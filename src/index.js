@@ -12,6 +12,7 @@ import findHandler from './handlers/find.js';
 import axios from 'axios';
 import { sanitizeInput } from './utils/htmlUtils.js';
 import { sendAndDelete } from './utils/botHelpers.js';
+import clearAllCommand from './commands/clearAll.js';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.use(session());
@@ -44,6 +45,7 @@ bot.use((ctx, next) => {
         );
 
         const matches = data.matches || [];
+        console.log(matches);
         matches.sort((a, b) => b.score - a.score);
         if (matches.length === 0) {
           return ctx.reply(ctx.i18n.menu.find.noResults);
@@ -53,9 +55,9 @@ bot.use((ctx, next) => {
         for (const m of matches) {
           const text = sanitizeInput(m.metadata?.text || '');
 
-          if (!text) continue;
+          if (!text && m.score > 0.8) continue;
           await ctx.replyWithHTML(
-            `<b>Text:</b> ${text} <b>Score:</b> ${m.score}`,
+            `<b>id</b>: ${m.id} <b>Text:</b> ${text} <b>Score:</b> ${m.score}`,
           );
         }
       } catch (err) {
@@ -75,6 +77,8 @@ bot.use((ctx, next) => {
 bot.command('start', startCommand);
 // /graph
 bot.command('graph', graphCommand);
+// /clearAll
+bot.command('clearAll', clearAllCommand);
 
 // Реагируем на переведённые тексты кнопок
 bot.hears((txt, ctx) => txt === ctx.i18n.menu.next, nextTaskHandler);

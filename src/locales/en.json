@@ -15,7 +15,12 @@
   },
   "commands": {
     "start": "Start/restart the bot",
-    "graph": "Show all saved notes 🕸️"
+    "graph": "Show all saved notes 🕸️",
+    "clearAll": {
+      "command": "Clear all saved notes 🧹",
+      "success": "Database cleared 🧹",
+      "error": "❌ Could not clear database. Please try again later."
+    }
   },
   "store": {
     "added": "✅ Note saved.",

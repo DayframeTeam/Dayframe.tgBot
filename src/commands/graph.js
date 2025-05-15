@@ -7,7 +7,8 @@ export default async function graphCommand(ctx) {
   const removeDots = await sendAnimatedDots(ctx, 300);
 
   // Выполняем основную работу
-  const resultText = await fetchGraphAndFormat(ctx);
+  // const resultText = await fetchGraphAndFormat(ctx);
+  const resultText = 'Временно не работает';
 
   // Удаляем dots сразу после получения результата
   await removeDots();
@@ -19,15 +20,12 @@ export default async function graphCommand(ctx) {
 async function fetchGraphAndFormat(ctx) {
   try {
     // пробуем получить до 100 самых «близких» к пустому запросу
-    const { data } = await axios.get(
-      `${process.env.INDEXER_URL}/search_text`,
-      {
-        params: {
-          chat_id: String(ctx.from.id),
-          text: '',
-        },
+    const { data } = await axios.get(`${process.env.INDEXER_URL}/search_text`, {
+      params: {
+        chat_id: String(ctx.from.id),
+        text: '',
       },
-    );
+    });
     // допустим, ваш API отдает { matches: [ { id, text, score }, … ] }
     const matches = data.matches || data; // подстрахуемся на случай, если возвращается сразу массив
 
