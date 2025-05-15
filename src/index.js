@@ -51,11 +51,10 @@ bot.use((ctx, next) => {
           return ctx.reply(ctx.i18n.menu.find.noResults);
         }
 
-        // Выводим результаты по одному
+        // Выводим только те, у кого score > 0.85
         for (const m of matches) {
+          if (m.score <= 0.85) continue;
           const text = sanitizeInput(m.metadata?.text || '');
-
-          if (!text && m.score > 0.8) continue;
           await ctx.replyWithHTML(
             `<b>id</b>: ${m.id} <b>Text:</b> ${text} <b>Score:</b> ${m.score}`,
           );
