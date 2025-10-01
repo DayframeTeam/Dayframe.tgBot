@@ -4,28 +4,10 @@
     "next": "🔜 Next task",
     "today": "📅 Tasks for today",
     "time": "⏳ Time left",
-    "find": {
-      "command": "🔍 Find notes",
-      "prompt": "Enter a keyword, and I'll find it in your knowledge base.",
-      "searching": "🔎 Searching for similar notes…",
-      "noResults": "⚠️ No results found.",
-      "error": "❌ Search error. Please try again later."
-    },
     "allCommands": "List all available commands"
   },
   "commands": {
-    "start": "Start/restart the bot",
-    "graph": "Show all saved notes 🕸️",
-    "clearAll": {
-      "command": "Clear all saved notes 🧹",
-      "success": "Database cleared 🧹",
-      "error": "❌ Could not clear database. Please try again later."
-    }
-  },
-  "store": {
-    "added": "✅ Note saved.",
-    "error": "❌ Could not save note. Please try later.",
-    "unsupported": "⚠️ I can only save plain text messages."
+    "start": "Start/restart the bot"
   },
   "nextTask": {
     "missed": "Missed tasks:",

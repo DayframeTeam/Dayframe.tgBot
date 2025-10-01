@@ -31,10 +31,11 @@ export default async function nextTaskHandler(ctx) {
       .sort((a, b) => a.start_time.localeCompare(b.start_time));
     const withoutTime = pending.filter((i) => !i.start_time);
 
-    // 5) Узнаём текущее HH:MM
+    // 5) Узнаём текущее HH:MM по московскому времени
     const now = new Date();
-    const hh = String(now.getHours()).padStart(2, '0');
-    const mm = String(now.getMinutes()).padStart(2, '0');
+    const moscowTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Moscow' }));
+    const hh = String(moscowTime.getHours()).padStart(2, '0');
+    const mm = String(moscowTime.getMinutes()).padStart(2, '0');
     const currentHM = `${hh}:${mm}`;
 
     // 6) Пропущенные и грядущие

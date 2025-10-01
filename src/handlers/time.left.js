@@ -36,9 +36,10 @@ export default async function timeLeftHandler(ctx) {
     ];
     const timedItems = items.filter((i) => i.start_time && i.end_time);
 
-    // 3) Текущее время HH:mm по зоне сервера (или можно вставить user.timezone)
+    // 3) Текущее время HH:mm по зоне мск (или можно вставить user.timezone) TODO::
     const now = new Date();
-    const currentHM = now.toLocaleTimeString('ru-RU', {
+    const moscowTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Moscow' }));
+    const currentHM = moscowTime.toLocaleTimeString('ru-RU', {
       hour12: false,
       hour: '2-digit',
       minute: '2-digit',
@@ -62,10 +63,10 @@ export default async function timeLeftHandler(ctx) {
       }
     }
 
-    // 5) Минут до полуночи
-    const tomorrow = new Date(now);
-    tomorrow.setHours(24, 0, 0, 0);
-    const minsToMidnight = Math.floor((tomorrow - now) / 60000);
+    // 5) Минут до полуночи по московскому времени
+    const moscowTomorrow = new Date(moscowTime);
+    moscowTomorrow.setHours(24, 0, 0, 0);
+    const minsToMidnight = Math.floor((moscowTomorrow - moscowTime) / 60000);
 
     // 6) Свободное время
     const freeMins = minsToMidnight - usedMins;
