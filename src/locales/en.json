@@ -1,5 +1,5 @@
 {
-  "greeting": "👋 Hello! I’m Dayframe — your personal assistant.\n\nHere’s what I can help you with:\n• 📅 Plan your tasks and days\n• 📥 Save notes, files, and ideas\n• 🔍 Search by keywords or meaning\n• 🕸️ Visualize connections between your notes\n\n💬 Everything you write (except commands) is saved automatically. Later, you’ll be able to find it using similar words or topics.\n\n🧠 Your knowledge base is built from our conversation.\n\n🕸️ Want to see what’s already stored? Use the /graph command.",
+  "greeting": "👋 Hello! I’m Dayframe — your personal assistant.\n\nHere’s what I can help you with:\n• 📅 Plan your tasks and days",
   "menu": {
     "next": "🔜 Next task",
     "today": "📅 Tasks for today",
