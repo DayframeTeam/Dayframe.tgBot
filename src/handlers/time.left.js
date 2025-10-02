@@ -30,9 +30,9 @@ export default async function timeLeftHandler(ctx) {
     const { data } = await axios.get(`${API_BASE}/bot/today/${chatId}`);
     const { tasks = [], templates = [] } = data;
 
-    // 2) Объединяем, фильтруем только те, у которых есть и start, и end
+    // 2) Объединяем, фильтруем только те, у которых есть и start, и end, и не выполнены
     const items = mergeTasksAndTemplates(tasks, templates);
-    const timedItems = items.filter((i) => i.start_time && i.end_time);
+    const timedItems = items.filter((i) => i.start_time && i.end_time && !i.is_done);
 
     // 3) Текущее время HH:mm по зоне мск (или можно вставить user.timezone) TODO::
     const now = new Date();
