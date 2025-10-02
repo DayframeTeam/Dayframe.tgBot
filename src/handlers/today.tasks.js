@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { getPriorityEmoji } from '../utils/priority.js';
 import { sanitizeInput } from '../utils/htmlUtils.js';
 import { sortByPriority } from '../utils/sort.js';
+import { mergeTasksAndTemplates } from '../utils/mergeTasksAndTemplates.js';
 
 const API_BASE = process.env.SERVER_URL || 'http://localhost:3000';
 
@@ -27,7 +28,6 @@ async function fetchTasks(ctx) {
   try {
     const { data } = await axios.get(`${API_BASE}/bot/today/${chatId}`);
     ({ tasks = [], templates = [], dateString } = data);
-
   } catch (error) {
     console.error('❌ Fetch tasks error', error);
     return ctx.i18n.todayTasks.error;
@@ -41,10 +41,7 @@ async function fetchTasks(ctx) {
   }
 
   // 2) Собираем единый массив, помечая шаблоны
-  const items = [
-    ...tasks.map((t) => ({ ...t, __isTemplate: false })),
-    ...templates.map((t) => ({ ...t, __isTemplate: true })),
-  ];
+  const items = mergeTasksAndTemplates(tasks, templates);
 
   // 3) Сортируем: сначала по start_time, потом без времени
   const withTime = items

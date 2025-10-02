@@ -2,6 +2,7 @@ import axios from 'axios';
 import { sendAnimatedDots } from '../utils/botHelpers.js';
 import 'dotenv/config';
 import { sanitizeInput } from '../utils/htmlUtils.js';
+import { mergeTasksAndTemplates } from '../utils/mergeTasksAndTemplates.js';
 
 const API_BASE = process.env.SERVER_URL || 'http://localhost:3000';
 
@@ -30,10 +31,7 @@ export default async function timeLeftHandler(ctx) {
     const { tasks = [], templates = [] } = data;
 
     // 2) Объединяем, фильтруем только те, у которых есть и start, и end
-    const items = [
-      ...tasks.map((t) => ({ ...t, __isTemplate: false })),
-      ...templates.map((t) => ({ ...t, __isTemplate: true })),
-    ];
+    const items = mergeTasksAndTemplates(tasks, templates);
     const timedItems = items.filter((i) => i.start_time && i.end_time);
 
     // 3) Текущее время HH:mm по зоне мск (или можно вставить user.timezone) TODO::

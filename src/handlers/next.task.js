@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { getPriorityEmoji } from '../utils/priority.js';
 import { sortByPriority } from '../utils/sort.js';
 import { sanitizeInput } from '../utils/htmlUtils.js';
+import { mergeTasksAndTemplates } from '../utils/mergeTasksAndTemplates.js';
 
 const API_BASE = process.env.SERVER_URL || 'http://localhost:3000';
 
@@ -18,10 +19,7 @@ export default async function nextTaskHandler(ctx) {
     let { tasks = [], templates = [] } = data;
 
     // 3) Объединяем задачи
-    const items = [
-      ...tasks.map((t) => ({ ...t, __isTemplate: false })),
-      ...templates.map((t) => ({ ...t, __isTemplate: true })),
-    ];
+    const items = mergeTasksAndTemplates(tasks, templates);
     // Оставляем только невыполненные юзер-задачи + все шаблоны
     const pending = items.filter((i) => i.__isTemplate || !i.is_done);
 
